@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>typeflow — a typing speed test</title>
+<meta name="description" content="A fast, minimal typing speed test. Measure your WPM and accuracy.">
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Sora:wght@600;700;800&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="bg-grid" aria-hidden="true"></div>
+
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-mark">▍</span>
+    <span class="brand-name">typeflow</span>
+  </div>
+
+  <div class="controls" id="controls">
+    <div class="control-group" id="mode-group">
+      <button class="control-btn active" data-mode="time">time</button>
+      <button class="control-btn" data-mode="words">words</button>
+      <button class="control-btn" data-mode="quote">quote</button>
+    </div>
+    <div class="control-sep" aria-hidden="true"></div>
+    <div class="control-group" id="value-group">
+      <!-- populated by JS depending on mode -->
+    </div>
+    <div class="control-sep" aria-hidden="true"></div>
+    <div class="control-group">
+      <button class="control-btn icon-btn" id="punctuation-btn" title="Toggle punctuation">punctuation</button>
+      <button class="control-btn icon-btn" id="numbers-btn" title="Toggle numbers">numbers</button>
+    </div>
+  </div>
+
+  <button class="theme-toggle" id="theme-toggle" title="Toggle theme" aria-label="Toggle theme">◐</button>
+</header>
+
+<main class="stage">
+
+  <div class="live-stats" id="live-stats">
+    <div class="live-stat">
+      <span class="live-stat-value" id="live-timer">30</span>
+    </div>
+  </div>
+
+  <section class="type-area" id="type-area" tabindex="0">
+    <div class="words" id="words" aria-live="off"></div>
+    <input id="hidden-input" class="hidden-input" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
+    <div class="focus-veil" id="focus-veil">
+      <p>click here or press any key to focus</p>
+    </div>
+  </section>
+
+  <div class="hint-row">
+    <button class="restart-btn" id="restart-btn" title="Restart test">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"></polyline><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path></svg>
+    </button>
+    <div class="hint-text"><kbd>tab</kbd> + <kbd>enter</kbd> — restart</div>
+  </div>
+
+  <section class="results" id="results" hidden>
+    <div class="results-grid">
+      <div class="result-primary">
+        <div class="result-label">wpm</div>
+        <div class="result-value" id="result-wpm">0</div>
+      </div>
+      <div class="result-primary">
+        <div class="result-label">accuracy</div>
+        <div class="result-value" id="result-acc">0%</div>
+      </div>
+      <div class="result-secondary-grid">
+        <div class="result-secondary">
+          <div class="result-label">raw</div>
+          <div class="result-value-sm" id="result-raw">0</div>
+        </div>
+        <div class="result-secondary">
+          <div class="result-label">characters</div>
+          <div class="result-value-sm" id="result-chars">0/0/0/0</div>
+        </div>
+        <div class="result-secondary">
+          <div class="result-label">consistency</div>
+          <div class="result-value-sm" id="result-consistency">0%</div>
+        </div>
+        <div class="result-secondary">
+          <div class="result-label">time</div>
+          <div class="result-value-sm" id="result-time">0s</div>
+        </div>
+      </div>
+    </div>
+    <div class="chart-wrap">
+      <canvas id="wpm-chart" height="140"></canvas>
+    </div>
+    <button class="next-btn" id="next-btn">
+      next test <span class="key-tip">(tab + enter)</span>
+    </button>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <span>built for the flow of typing — no accounts, no ads, just words</span>
+</footer>
+
+<script src="script.js"></script>
+<script src="autotype.js"></script>
+</body>
+</html>
